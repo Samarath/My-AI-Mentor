@@ -1,0 +1,28 @@
+.head-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  .head-section-1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #8c33ff, #0098ff, #ce00ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  }
+  .head-section-2 {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    ul {
+      font-weight: bold;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+  }
+}

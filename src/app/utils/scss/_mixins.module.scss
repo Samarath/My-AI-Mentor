@@ -1,0 +1,62 @@
+@import "./variable";
+
+@mixin form-header {
+  color: $text-color-black;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+@mixin form-heading {
+  color: $text-color-black;
+  font-size: 0.953rem;
+  font-style: normal;
+  font-weight: 500;
+  margin: 15px 0;
+}
+
+@mixin helper-text {
+  color: #929292;
+  font-size: 0.875rem;
+  font-weight: 300;
+  margin: 10px 0;
+  line-height: normal;
+}
+
+@mixin primary-button {
+  background-color: #2f96fa !important;
+  border-radius: 10px;
+  text-transform: none !important;
+  padding: 15px 10px;
+  color: #fff;
+  &:disabled {
+    background-color: #a5a5a5 !important;
+    color: #fff !important;
+  }
+}
+@mixin secondary-button {
+  border: 1px solid #2f96fa;
+  color: #2f96fa;
+  border-radius: 10px;
+  text-transform: none !important;
+  padding: 15px 10px;
+
+  &:disabled {
+    background-color: #a5a5a5 !important;
+    color: #fff !important;
+    border: 1px solid #a5a5a5;
+  }
+}
+
+@mixin primary-header {
+  color: #201f63;
+  font-size: 2.813rem;
+  font-weight: 800;
+}
+
+@mixin primary-subheading {
+  color: #585c63;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 300;
+}

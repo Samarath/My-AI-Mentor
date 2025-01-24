@@ -1,0 +1,26 @@
+@import "./../../utils/scss/variable.module";
+.primary {
+  border-radius: 10px;
+  background: #2f96fa !important;
+  padding: 10px 15px;
+  color: #fff;
+  // font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 140%;
+  text-transform: none !important;
+}
+
+.primary:disabled {
+  background-color: $primary-p-75 !important;
+  color: $white-color !important;
+}
+
+.secondary {
+  border: 1px solid #2f96fa;
+  color: #2f96fa;
+  // font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 140%;
+  padding: 10px 45px;
+  text-transform: none !important;
+}
