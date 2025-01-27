@@ -1,0 +1,31 @@
+.footer-container {
+  margin-top: 50px;
+  background: linear-gradient(45deg, #f4f4ff, #f0fbff, #f9e6ff);
+  padding-top: 20px;
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .page-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    a {
+      text-decoration: none;
+      color: #36007c;
+      font-weight: 600;
+    }
+  }
+  .copy-right {
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-top: 1px solid gray;
+  }
+}

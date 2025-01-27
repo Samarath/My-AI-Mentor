@@ -3,6 +3,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  -webkit-box-shadow: -3px 1px 26px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -3px 1px 26px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: -3px 1px 26px -12px rgba(0, 0, 0, 0.75);
+
   .head-section-1 {
     display: flex;
     align-items: center;

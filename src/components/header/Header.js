@@ -1,7 +1,7 @@
 import PrimaryButton from "@/app/commons/buttons/PrimaryButton";
 import classes from "./header.module.scss";
 import Image from "next/image";
-import logo from "../../../public/assets/logo.png";
+import logo from "../../app/assets/logo.png";
 
 const Header = () => {
   return (
