@@ -3,6 +3,7 @@ import classes from "./home-page.module.scss";
 import hero_img from "../../../app/assets/hero.webp";
 import PrimaryButton from "@/app/commons/buttons/PrimaryButton";
 import SecondaryButton from "@/app/commons/buttons/SecondaryButton";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -21,9 +22,12 @@ const HeroSection = () => {
           </p>
         </div>
         <div className={classes["action-center"]}>
-          <PrimaryButton className={classes["primary-button"]}>
-            Start Now
-          </PrimaryButton>
+          <Link href="/my-journey">
+            <PrimaryButton className={classes["primary-button"]}>
+              Start Now
+            </PrimaryButton>
+          </Link>
+
           <SecondaryButton className={classes["secondary-button"]}>
             Learn more
           </SecondaryButton>

@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 AI-Powered Career Growth Mentor
 
-## Getting Started
+## 📌 Overview
 
-First, run the development server:
+AI-Powered Career Growth Mentor is a platform designed to help **students seek mentorship and track their career progress**.  
+It provides **personalized skill roadmaps**, allowing users to **set career goals, track progress interactively, and receive AI-driven mentorship** tailored to their interests.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- ✅ **Personalized Roadmaps** – AI-generated learning paths tailored to individual career goals.
+- ✅ **Interactive Progress Tracking** – Users can mark milestones as completed and visualize their growth.
+- ✅ **AI-Powered Guidance** – Intelligent career suggestions based on industry trends and user skills.
+- ✅ **Seamless Authentication** – Google and Facebook login via Firebase for easy access.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+### **Frontend**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ⚡ **Next.js (React)** – For a fast, interactive, and scalable UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Backend**
 
-## Deploy on Vercel
+- 🏗 **Java (Spring Boot)** – For API development and authentication handling.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### **AI Logic**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 🧠 **Python (LangChain)** – For AI-powered mentorship and roadmap generation.
+
+### **Authentication & Database**
+
+- 🔐 **Firebase** – For user authentication and progress tracking.
+
+### **UI Components**
+
+- 📊 **React Timeline & Other Libraries** – For interactive roadmap visualization.
+
+---
+
+## 🎯 Why This Platform?
+
+🚀 **AI-driven personalized learning** – Get career insights based on your interests.  
+📈 **Track your progress in real-time** – Interactive roadmaps to keep you on track.  
+🤖 **Stay ahead of industry trends** – AI suggests relevant skills and courses.
+
+---
+
+## 💡 Future Enhancements
+
+- 🔄 **Community-based mentorship & discussion forums**
+- 📚 **Integration with popular learning platforms (Udemy, Coursera, etc.)**
+- 🎯 **Gamification & rewards for completing milestones**
+
+---
+
+### 🌟 **Join Us on This Journey!**
+
+This platform is designed to **empower students and professionals** in their career growth.  
+Feel free to contribute, suggest features, or use it to shape your future! 🚀
