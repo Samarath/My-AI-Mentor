@@ -3,8 +3,8 @@
   border: 1px solid #cecece;
   border-radius: 20px;
   padding: 20px;
-  background-color: #6d0088;
   height: 250px;
+  max-width: 390px;
   .img {
     margin: auto;
     display: flex;
@@ -15,14 +15,12 @@
   }
 
   h3 {
-    color: #fff;
     text-align: center;
     font-weight: 800;
     border-bottom: 1px solid gray;
     padding: 5px;
   }
   p {
-    color: #fff;
     text-align: center;
     font-weight: 500;
     margin-top: 5px;
