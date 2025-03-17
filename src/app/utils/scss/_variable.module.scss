@@ -58,6 +58,38 @@ $light-gray-color: #f1f3f6;
 $under-text-subtitle-color: #8b9099;
 $under-text-title-color: #585c63;
 $white-color: #ffffff;
+// Colors
+$primary-color: #0070f3;
+$primary-light: #e6f0ff;
+$secondary-color: #6c757d;
+$background-color: #ffffff;
+$text-color: #333333;
+$border-color: #e5e7eb;
+$muted-color: #6c757d;
+$danger-color: #dc3545;
+$success-color: #28a745;
+$warning-color: #ffc107;
+
+// Sizes
+$sidebar-width: 300px;
+$sidebar-width-mobile: 280px;
+$header-height: 64px;
+$border-radius: 8px;
+
+// Effects
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$transition-speed: 0.3s;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Z-index
+$z-index-dropdown: 20;
+$z-index-sidebar: 30;
+$z-index-overlay: 25;
 //Mobile view
 
 $xs: 480px;
