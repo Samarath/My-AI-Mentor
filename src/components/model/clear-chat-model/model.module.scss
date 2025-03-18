@@ -1,0 +1,43 @@
+.container {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.content {
+  text-align: center;
+  h2 {
+    color: #6c6c6c;
+    margin-bottom: 10px;
+  }
+  .btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .primary-btn {
+      border-radius: 10px;
+      background: #2f96fa !important;
+      padding: 10px 15px;
+      color: #fff;
+      // font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 140%;
+      text-transform: none !important;
+      flex: 1;
+      width: 50%;
+    }
+  }
+  .seconday-btn {
+    border: 1px solid #2f96fa;
+    border-radius: 10px;
+    color: #2f96fa;
+    width: 50%;
+    font-weight: 600;
+    line-height: 140%;
+    padding: 10px 45px;
+    text-transform: none !important;
+  }
+}

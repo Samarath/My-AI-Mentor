@@ -15,7 +15,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import GoogleIcon from "@mui/icons-material/Google";
 
 export default function Footer() {
-  const navItems = ["Home", "News", "About", "Contact Us", "Our Team"];
+  const navItems = ["Home", "About", "Contact Us"];
 
   return (
     <Box

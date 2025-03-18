@@ -176,7 +176,7 @@ export default function ChatInterface({ currentChat, toggleDrawer }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.chatTitle}>
-          Learning Path AI
+          AI Mentor
         </Typography>
       </header>
 
@@ -185,7 +185,7 @@ export default function ChatInterface({ currentChat, toggleDrawer }) {
           <div className={classes.chatEmpty}>
             <div className={classes.chatEmptyContent}>
               <Typography variant="h4" className={classes.chatEmptyTitle}>
-                Welcome to Learning Path AI
+                Welcome to AI Mentor
               </Typography>
               <Typography variant="body1" className={classes.chatEmptyText}>
                 Ask me anything about learning paths, career development, or
@@ -219,7 +219,13 @@ export default function ChatInterface({ currentChat, toggleDrawer }) {
                     {message.role === "user" ? <PersonIcon /> : <BotIcon />}
                   </Avatar>
 
-                  <div className={classes.messageContent}>
+                  <div
+                    className={
+                      message.role === "user"
+                        ? classes.messageContent
+                        : classes.messageContentBot
+                    }
+                  >
                     {message.role === "user" ? (
                       <Paper
                         className={`${classes.message} ${classes.userMessage}`}
@@ -265,26 +271,10 @@ export default function ChatInterface({ currentChat, toggleDrawer }) {
                               <Button
                                 variant="outlined"
                                 size="small"
-                                startIcon={<BookmarkIcon />}
-                                className={classes.actionButton}
-                              >
-                                Save
-                              </Button>
-                              <Button
-                                variant="outlined"
-                                size="small"
                                 startIcon={<ShareIcon />}
                                 className={classes.actionButton}
                               >
                                 Share
-                              </Button>
-                              <Button
-                                variant="outlined"
-                                size="small"
-                                startIcon={<EditIcon />}
-                                className={classes.actionButton}
-                              >
-                                Modify
                               </Button>
                             </div>
                           </Card>
