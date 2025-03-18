@@ -1,15 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import classes from "./my-journey.module.scss";
+import classes from "@/app/(main)/my-journey/my-journey.module.scss";
 import ChatHistory from "@/components/chat-history/ChatHistory";
 import ChatInterface from "@/components/chat-interface/ChatInterface";
-import SuggestionPanel from "@/components/suggestion-pannel/SuggestionPannel";
 
 export default function Home() {
   const [currentChat, setCurrentChat] = useState(null);
-  const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
-  const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -17,10 +15,6 @@ export default function Home() {
       setIsMobile(window.innerWidth < 768);
     };
     checkIfMobile();
-    if (window.innerWidth < 768) {
-      setLeftSidebarOpen(false);
-      setRightSidebarOpen(false);
-    }
     window.addEventListener("resize", checkIfMobile);
     return () => {
       window.removeEventListener("resize", checkIfMobile);
@@ -28,33 +22,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={classes["app"]}>
+    <div className={classes.app}>
       <ChatHistory
         currentChat={currentChat}
         setCurrentChat={setCurrentChat}
-        isOpen={leftSidebarOpen}
-        setIsOpen={setLeftSidebarOpen}
+        open={drawerOpen}
+        setOpen={setDrawerOpen}
       />
       <ChatInterface
         currentChat={currentChat}
-        toggleLeftSidebar={() => setLeftSidebarOpen(!leftSidebarOpen)}
-        toggleRightSidebar={() => setRightSidebarOpen(!rightSidebarOpen)}
+        toggleDrawer={() => setDrawerOpen(!drawerOpen)}
       />
-      <SuggestionPanel
-        isOpen={rightSidebarOpen}
-        setIsOpen={setRightSidebarOpen}
-      />
-
-      {/* Overlay for mobile when sidebar is open */}
-      {isMobile && (leftSidebarOpen || rightSidebarOpen) && (
-        <div
-          className={classes["sidebar-overlay"]}
-          onClick={() => {
-            setLeftSidebarOpen(false);
-            setRightSidebarOpen(false);
-          }}
-        />
-      )}
     </div>
   );
 }

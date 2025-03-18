@@ -1,61 +1,65 @@
 import {
-  Book,
-  Code,
-  Filter,
-  MicExternalOffOutlined,
-  VideoCall,
+  MenuBook as BookIcon,
+  VideoLibrary as VideoIcon,
+  Description as FileIcon,
+  Code as CodeIcon,
+  Link as LinkIcon,
 } from "@mui/icons-material";
-import classes from "../../app/(main)/my-journey/my-journey.module.scss";
-
-// import { Book, Video, FileText, Code, ExternalLink } from "lucide-react"
+import { Typography } from "@mui/material";
+import classes from "@/app/(main)/my-journey/my-journey.module.scss";
 
 export default function LearningPathTimeline({ steps }) {
   const getResourceIcon = (type) => {
     switch (type.toLowerCase()) {
       case "book":
-        return <Book size={16} />;
+        return <BookIcon fontSize="small" />;
       case "video":
-        return <VideoCall size={16} />;
+        return <VideoIcon fontSize="small" />;
       case "documentation":
-        return <Filter size={16} />;
+        return <FileIcon fontSize="small" />;
       case "project":
-        return <Code size={16} />;
+        return <CodeIcon fontSize="small" />;
       default:
-        return <MicExternalOffOutlined size={16} />;
+        return <LinkIcon fontSize="small" />;
     }
   };
 
   return (
-    <div className={classes["timeline"]}>
+    <div className={classes.timeline}>
       {steps.map((step, index) => (
-        <div key={index} className={classes["timeline__step"]}>
-          <div className={classes["timeline__step-number"]}>{index + 1}</div>
+        <div key={index} className={classes.timelineStep}>
+          <div className={classes.timelineStepNumber}>{index + 1}</div>
 
-          <div className={classes["timeline__step-content"]}>
-            <h3 className={classes["timeline__step-title"]}>{step.title}</h3>
-            <p className={classes["timeline__step-description"]}>
+          <div className={classes.timelineStepContent}>
+            <Typography variant="h6" className={classes.timelineStepTitle}>
+              {step.title}
+            </Typography>
+            <Typography
+              variant="body2"
+              className={classes.timelineStepDescription}
+            >
               {step.description}
-            </p>
+            </Typography>
 
-            <div className={classes["timeline__resources"]}>
+            <div className={classes.timelineResources}>
               {step.resources.map((resource, resourceIndex) => (
-                <div key={resourceIndex} className={classes["resource-card"]}>
-                  <div className={classes["resource-card__content"]}>
-                    <div className={classes["resource-card__type"]}>
+                <div key={resourceIndex} className={classes.resourceCard}>
+                  <div className={classes.resourceCardContent}>
+                    <div className={classes.resourceType}>
                       {getResourceIcon(resource.type)}
                       <span>{resource.type}</span>
                     </div>
                     <a
                       href={resource.url}
-                      className={classes["resource-card__title"]}
+                      className={classes.resourceTitle}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       {resource.title}
                     </a>
-                    <MicExternalOffOutlined
-                      size={16}
-                      className={classes["resource-card__icon"]}
+                    <LinkIcon
+                      fontSize="small"
+                      className={classes.resourceIcon}
                     />
                   </div>
                 </div>

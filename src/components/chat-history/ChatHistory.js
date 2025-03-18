@@ -1,37 +1,42 @@
 "use client";
 
-import {
-  MessageSharp,
-  MoreHorizOutlined,
-  PlusOneSharp,
-  Search,
-  Star,
-  TramSharp,
-  X,
-} from "@mui/icons-material";
 import { useState } from "react";
-import classes from "../../app/(main)/my-journey/my-journey.module.scss";
-// import {
-//   MessageSquare,
-//   Search,
-//   Star,
-//   MoreHorizontal,
-//   Trash2,
-//   Plus,
-//   X,
-// } from "lucide-react";
+import {
+  Drawer,
+  IconButton,
+  TextField,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Divider,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import {
+  Close as CloseIcon,
+  Search as SearchIcon,
+  Add as AddIcon,
+  Message as MessageIcon,
+  MoreVert as MoreVertIcon,
+  Star as StarIcon,
+  Delete as DeleteIcon,
+} from "@mui/icons-material";
+import classes from "@/app/(main)/my-journey/my-journey.module.scss";
 
 export default function ChatHistory({
   currentChat,
   setCurrentChat,
-  isOpen,
-  setIsOpen,
+  open,
+  setOpen,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [favoriteChats, setFavoriteChats] = useState([]);
-  const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const [selectedChatId, setSelectedChatId] = useState(null);
 
-  // Mock chat history data
   const chatHistory = [
     { id: "1", title: "Learning React Fundamentals", date: "2 days ago" },
     { id: "2", title: "Full-Stack Development Path", date: "1 week ago" },
@@ -45,159 +50,135 @@ export default function ChatHistory({
     } else {
       setFavoriteChats([...favoriteChats, id]);
     }
+    handleMenuClose();
   };
 
   const filteredChats = chatHistory.filter((chat) =>
     chat.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const toggleDropdown = (id) => {
-    if (dropdownOpen === id) {
-      setDropdownOpen(null);
-    } else {
-      setDropdownOpen(id);
-    }
+  const handleMenuOpen = (event, id) => {
+    setMenuAnchorEl(event.currentTarget);
+    setSelectedChatId(id);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
   };
 
   return (
-    <aside
-      className={
-        classes[
-          `sidebar sidebar--left ${
-            isOpen ? "sidebar--open" : "sidebar--closed"
-          }`
-        ]
-      }
+    <Drawer
+      anchor="left"
+      open={open}
+      onClose={() => setOpen(false)}
+      className={classes.drawer}
+      classes={{
+        paper: classes.drawerPaper,
+      }}
     >
-      <div className={classes["sidebar__header"]}>
-        <div className={classes["sidebar__title-container"]}>
-          <h2 className={classes["sidebar__title"]}>Chat History</h2>
-          <button
-            className={classes["sidebar__close-button"]}
-            onClick={() => setIsOpen(false)}
+      <div className={classes.drawerHeader}>
+        <Typography variant="h6" className={classes.drawerTitle}>
+          Chat History
+        </Typography>
+        <IconButton onClick={() => setOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </div>
+
+      <div className={classes.searchContainer}>
+        <TextField
+          placeholder="Search chats..."
+          variant="outlined"
+          size="small"
+          fullWidth
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          InputProps={{
+            startAdornment: <SearchIcon className={classes.searchIcon} />,
+          }}
+          className={classes.searchInput}
+        />
+      </div>
+
+      <List className={classes.chatList}>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => setCurrentChat(null)}
+            className={classes.newChatButton}
           >
-            <X size={18} />
-          </button>
-        </div>
-        <div className={classes["sidebar__search"]}>
-          <div className={classes["search-input"]}>
-            <Search className={classes["search-input__icon"]} />
-            <input
-              type="text"
-              placeholder="Search chats..."
-              className={classes["search-input__field"]}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
+            <ListItemIcon>
+              <AddIcon className={classes.addIcon} />
+            </ListItemIcon>
+            <ListItemText primary="New Chat" />
+          </ListItemButton>
+        </ListItem>
 
-      <div className={classes["sidebar__content"]}>
-        <ul className={classes["sidebar-menu"]}>
-          <li className={classes["sidebar-menu__item"]}>
-            <button
-              className={
-                classes["sidebar-menu__button sidebar-menu__button--new"]
-              }
-              onClick={() => setCurrentChat(null)}
-            >
-              <PlusOneSharp size={16} />
-              <span>New Chat</span>
-            </button>
-          </li>
+        <Divider className={classes.divider} />
 
-          {filteredChats.map((chat) => (
-            <li
-              key={chat.id}
-              className={
-                classes[
-                  `sidebar-menu__item ${
-                    currentChat === chat.id ? "sidebar-menu__item--active" : ""
-                  }`
-                ]
-              }
-            >
-              <button
-                className={classes["sidebar-menu__button"]}
-                onClick={() => setCurrentChat(chat.id)}
+        {filteredChats.map((chat) => (
+          <ListItem
+            key={chat.id}
+            disablePadding
+            secondaryAction={
+              <IconButton
+                edge="end"
+                onClick={(e) => handleMenuOpen(e, chat.id)}
               >
-                <div className={classes["sidebar-menu__button-content"]}>
-                  <div className={classes["sidebar-menu__icon-title"]}>
-                    <MessageSharp size={16} className="sidebar-menu__icon" />
-                    <span className={classes["sidebar-menu__title"]}>
-                      {chat.title}
-                    </span>
-                  </div>
-                  <span className={classes["sidebar-menu__date"]}>
-                    {chat.date}
-                  </span>
-                </div>
-              </button>
+                <MoreVertIcon />
+              </IconButton>
+            }
+          >
+            <ListItemButton
+              selected={currentChat === chat.id}
+              onClick={() => setCurrentChat(chat.id)}
+              className={classes.chatItem}
+            >
+              <ListItemIcon>
+                <MessageIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary={chat.title}
+                secondary={chat.date}
+                className={classes.chatItemText}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
 
-              <div className={classes["sidebar-menu__actions"]}>
-                <button
-                  className={classes["sidebar-menu__action-button"]}
-                  onClick={() => toggleDropdown(chat.id)}
-                >
-                  <MoreHorizOutlined size={16} />
-                </button>
+      <Menu
+        anchorEl={menuAnchorEl}
+        open={Boolean(menuAnchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={() => toggleFavorite(selectedChatId)}>
+          <ListItemIcon>
+            <StarIcon
+              color={
+                favoriteChats.includes(selectedChatId) ? "warning" : "inherit"
+              }
+            />
+          </ListItemIcon>
+          <ListItemText>
+            {favoriteChats.includes(selectedChatId)
+              ? "Remove from favorites"
+              : "Add to favorites"}
+          </ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleMenuClose}>
+          <ListItemIcon>
+            <DeleteIcon color="error" />
+          </ListItemIcon>
+          <ListItemText>Delete chat</ListItemText>
+        </MenuItem>
+      </Menu>
 
-                {dropdownOpen === chat.id && (
-                  <div className={classes["dropdown"]}>
-                    <ul className={classes["dropdown__menu"]}>
-                      <li className={classes["dropdown__item"]}>
-                        <button
-                          className={classes["dropdown__button"]}
-                          onClick={() => toggleFavorite(chat.id)}
-                        >
-                          <Star
-                            size={16}
-                            className={
-                              classes[
-                                favoriteChats.includes(chat.id)
-                                  ? "dropdown__icon dropdown__icon--favorite"
-                                  : "dropdown__icon"
-                              ]
-                            }
-                          />
-                          <span>
-                            {favoriteChats.includes(chat.id)
-                              ? "Remove from favorites"
-                              : "Add to favorites"}
-                          </span>
-                        </button>
-                      </li>
-                      <li className={classes["dropdown__item"]}>
-                        <button
-                          className={
-                            classes["dropdown__button dropdown__button--delete"]
-                          }
-                        >
-                          <TramSharp
-                            size={16}
-                            className={classes["dropdown__icon"]}
-                          />
-                          <span>Delete chat</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className={classes["sidebar__footer"]}>
-        <button
-          className={classes["button button--outline button--full-width"]}
-        >
-          <TramSharp size={16} className={classes["button__icon"]} />
+      <div className={classes.drawerFooter}>
+        <button className={classes.clearButton}>
+          <DeleteIcon className={classes.buttonIcon} />
           Clear History
         </button>
       </div>
-    </aside>
+    </Drawer>
   );
 }

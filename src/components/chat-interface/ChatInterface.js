@@ -1,46 +1,40 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
-// import {
-//   Bookmark,
-//   Share2,
-//   Edit,
-//   Send,
-//   User,
-//   Bot,
-//   Menu,
-//   PanelRight,
-// } from "lucide-react";
-
-import LearningPathTimeline from "../learning-path-timeline/LearningPathTimeline";
 import {
-  AdminPanelSettingsSharp,
-  Bookmark,
-  Edit,
-  Menu,
-  Send,
-  Share,
+  IconButton,
+  TextField,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Avatar,
+  Paper,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  Send as SendIcon,
+  Bookmark as BookmarkIcon,
+  Share as ShareIcon,
+  Edit as EditIcon,
+  Person as PersonIcon,
+  SmartToy as BotIcon,
 } from "@mui/icons-material";
-import classes from "../../app/(main)/my-journey/my-journey.module.scss";
+import classes from "@/app/(main)/my-journey/my-journey.module.scss";
+import LearningPathTimeline from "../learning-path-timeline/LearningPathTimeline";
 
-export default function ChatInterface({
-  currentChat,
-  toggleLeftSidebar,
-  toggleRightSidebar,
-}) {
+export default function ChatInterface({ currentChat, toggleDrawer }) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const messagesEndRef = useRef < HTMLDivElement > null;
+  const messagesEndRef = useRef(null);
 
-  // Scroll to bottom when messages change
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // }, [messages]);
 
-  // Load chat history when currentChat changes
   useEffect(() => {
     if (currentChat) {
-      // In a real app, you would fetch the chat history from an API
       const mockMessages = [
         {
           id: "1",
@@ -126,7 +120,6 @@ export default function ChatInterface({
     setMessages([...messages, userMessage]);
     setInput("");
 
-    // Simulate AI response (in a real app, you would call an API)
     setTimeout(() => {
       const aiResponse = {
         id: (Date.now() + 1).toString(),
@@ -177,161 +170,124 @@ export default function ChatInterface({
   };
 
   return (
-    <main className={classes["chat"]}>
-      <header className={classes["chat__header"]}>
-        <button
-          className={classes["chat__sidebar-toggle"]}
-          onClick={toggleLeftSidebar}
-        >
-          <Menu size={20} />
-        </button>
-        <h1 className={classes["chat__title"]}>Learning Path AI</h1>
-        <button
-          className={classes["chat__sidebar-toggle"]}
-          onClick={toggleRightSidebar}
-        >
-          <AdminPanelSettingsSharp size={20} />
-        </button>
+    <main className={classes.chat}>
+      <header className={classes.chatHeader}>
+        <IconButton onClick={toggleDrawer} className={classes.menuButton}>
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.chatTitle}>
+          Learning Path AI
+        </Typography>
       </header>
 
-      <div className={classes["chat__messages"]}>
+      <div className={classes.chatMessages}>
         {messages.length === 0 ? (
-          <div className={classes["chat__empty"]}>
-            <div className={classes["chat__empty-content"]}>
-              <h2 className={classes["chat__empty-title"]}>
+          <div className={classes.chatEmpty}>
+            <div className={classes.chatEmptyContent}>
+              <Typography variant="h4" className={classes.chatEmptyTitle}>
                 Welcome to Learning Path AI
-              </h2>
-              <p className={classes["chat__empty-text"]}>
+              </Typography>
+              <Typography variant="body1" className={classes.chatEmptyText}>
                 Ask me anything about learning paths, career development, or
                 skill acquisition.
-              </p>
+              </Typography>
             </div>
           </div>
         ) : (
-          <div className={classes["chat__message-list"]}>
+          <div className={classes.messageList}>
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={
-                  classes[
-                    `chat__message-container ${
-                      message.role === "user"
-                        ? "chat__message-container--user"
-                        : "chat__message-container--assistant"
-                    }`
-                  ]
-                }
+                className={`${classes.messageContainer} ${
+                  message.role === "user"
+                    ? classes.userMessageContainer
+                    : classes.assistantMessageContainer
+                }`}
               >
                 <div
-                  className={
-                    classes[
-                      `chat__message-wrapper ${
-                        message.role === "user"
-                          ? "chat__message-wrapper--user"
-                          : ""
-                      }`
-                    ]
-                  }
+                  className={`${classes.messageWrapper} ${
+                    message.role === "user" ? classes.userMessageWrapper : ""
+                  }`}
                 >
-                  <div
-                    className={
-                      classes[
-                        `chat__avatar ${
-                          message.role === "user"
-                            ? "chat__avatar--user"
-                            : "chat__avatar--assistant"
-                        }`
-                      ]
-                    }
+                  <Avatar
+                    className={`${classes.avatar} ${
+                      message.role === "user"
+                        ? classes.userAvatar
+                        : classes.assistantAvatar
+                    }`}
                   >
-                    {/* {message.role === "user" ? (
-                      <User size={16} />
-                    ) : (
-                      <Bot size={16} />
-                    )} */}
-                  </div>
+                    {message.role === "user" ? <PersonIcon /> : <BotIcon />}
+                  </Avatar>
 
-                  <div className={classes["chat__message-content"]}>
+                  <div className={classes.messageContent}>
                     {message.role === "user" ? (
-                      <div
-                        className={classes["chat__message chat__message--user"]}
+                      <Paper
+                        className={`${classes.message} ${classes.userMessage}`}
                       >
-                        <p>{message.content}</p>
-                      </div>
+                        <Typography variant="body1">
+                          {message.content}
+                        </Typography>
+                      </Paper>
                     ) : (
-                      <div
-                        className={classes["chat__message-assistant-content"]}
-                      >
-                        <div
-                          className={
-                            classes["chat__message chat__message--assistant"]
-                          }
+                      <div className={classes.assistantContent}>
+                        <Paper
+                          className={`${classes.message} ${classes.assistantMessage}`}
                         >
-                          <p>{message.content}</p>
-                        </div>
+                          <Typography variant="body1">
+                            {message.content}
+                          </Typography>
+                        </Paper>
 
                         {message.learningPath && (
-                          <div className={classes["learning-path-card"]}>
-                            <div
-                              className={classes["learning-path-card__header"]}
-                            >
-                              <h3
-                                className={classes["learning-path-card__title"]}
+                          <Card className={classes.learningPathCard}>
+                            <CardContent className={classes.learningPathHeader}>
+                              <Typography
+                                variant="h6"
+                                className={classes.learningPathTitle}
                               >
                                 {message.learningPath.title}
-                              </h3>
-                              <p className="learning-path-card__description">
+                              </Typography>
+                              <Typography variant="body2" color="textSecondary">
                                 A personalized learning path to help you achieve
                                 your goals
-                              </p>
-                            </div>
+                              </Typography>
+                            </CardContent>
 
-                            <div
-                              className={classes["learning-path-card__content"]}
+                            <CardContent
+                              className={classes.learningPathContent}
                             >
                               <LearningPathTimeline
                                 steps={message.learningPath.steps}
                               />
-                            </div>
+                            </CardContent>
 
-                            <div
-                              className={classes["learning-path-card__footer"]}
-                            >
-                              <button
-                                className={
-                                  classes["button button--outline button--sm"]
-                                }
+                            <div className={classes.learningPathFooter}>
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                startIcon={<BookmarkIcon />}
+                                className={classes.actionButton}
                               >
-                                <Bookmark
-                                  size={16}
-                                  className={classes["button__icon"]}
-                                />
                                 Save
-                              </button>
-                              <button
-                                className={
-                                  classes["button button--outline button--sm"]
-                                }
+                              </Button>
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                startIcon={<ShareIcon />}
+                                className={classes.actionButton}
                               >
-                                <Share
-                                  size={16}
-                                  className={classes["button__icon"]}
-                                />
                                 Share
-                              </button>
-                              <button
-                                className={
-                                  classes["button button--outline button--sm"]
-                                }
+                              </Button>
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                startIcon={<EditIcon />}
+                                className={classes.actionButton}
                               >
-                                <Edit
-                                  size={16}
-                                  className={classes["button__icon"]}
-                                />
                                 Modify
-                              </button>
+                              </Button>
                             </div>
-                          </div>
+                          </Card>
                         )}
                       </div>
                     )}
@@ -344,29 +300,33 @@ export default function ChatInterface({
         )}
       </div>
 
-      <div className={classes["chat__input-container"]}>
-        <form onSubmit={handleSubmit} className={classes["chat__form"]}>
-          <div className={classes["chat__input-wrapper"]}>
-            <textarea
-              placeholder="Ask about a learning path (e.g., 'How to learn React in 3 months?')"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className={classes["chat__input"]}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSubmit(e);
-                }
-              }}
-            />
-            <button
-              type="submit"
-              className={classes["chat__submit-button"]}
-              disabled={!input.trim()}
-            >
-              <Send size={16} />
-            </button>
-          </div>
+      <div className={classes.inputContainer}>
+        <form onSubmit={handleSubmit} className={classes.inputForm}>
+          <TextField
+            placeholder="Ask about a learning path (e.g., 'How to learn React in 3 months?')"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            multiline
+            minRows={2}
+            maxRows={4}
+            fullWidth
+            variant="outlined"
+            className={classes.textField}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+          />
+          <IconButton
+            type="submit"
+            disabled={!input.trim()}
+            className={classes.sendButton}
+            color="primary"
+          >
+            <SendIcon />
+          </IconButton>
         </form>
       </div>
     </main>
